@@ -1,3 +1,7 @@
+# Custom
+out
+.vscode
+
 # Prerequisites
 *.d
 
