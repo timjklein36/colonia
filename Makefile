@@ -8,7 +8,7 @@ CPP=${SRC}/cpp
 OBJ=object
 INC= -I${HEAD}
 
-CLASSES= Util Colony Organism
+CLASSES= Util Colony Organism Insect Ant
 
 # Replace all CLASSES with ${OBJ}/%.o (e.g. "object_directory/util.o")
 _OBJS_= $(patsubst %, ${OBJ}/%.o, ${CLASSES}) ${OBJ}/main.o
