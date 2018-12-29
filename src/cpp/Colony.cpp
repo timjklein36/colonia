@@ -32,8 +32,7 @@ const std::string Colony::getName() {
 }
 
 std::ostream& operator<< (std::ostream& out, const Colony& colony) {
-    out << "Colony: '" << colony.name << "'" << std::endl;
-    
+    out << "Colony: '" << colony.name << "', ";
     out << "Members: [";
 
     for (auto iter = colony.members.cbegin(); iter != colony.members.cend(); ++iter) {

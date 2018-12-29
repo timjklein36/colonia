@@ -3,24 +3,27 @@ OPT=-c -Wall --std=c++11
 BIN=colony
 OUT=out
 SRC=src
+BOOST=/usr/include/boost
+BOOST_OPTS=-DBOOST_LOG_DYN_LINK
 HEAD=${SRC}/header
 CPP=${SRC}/cpp
 OBJ=object
-INC= -I${HEAD}
+INC=-I${HEAD} -I${BOOST}
+LIBS=-L/usr/lib -lboost_log -lpthread
 
-CLASSES= Util Colony Organism Insect Ant
+CLASSES= Colony Organism Insect Ant
 
 # Replace all CLASSES with ${OBJ}/%.o (e.g. "object_directory/util.o")
 _OBJS_= $(patsubst %, ${OBJ}/%.o, ${CLASSES}) ${OBJ}/main.o
 
 ${OUT}/${BIN}: ${_OBJS_} | ${OUT}/
-	${COMP} ${_OBJS_} -o ${OUT}/${BIN}
+	${COMP} ${_OBJS_} -o ${OUT}/${BIN} ${LIBS} ${BOOST_OPTS}
 
 ${OBJ}/main.o: main.cpp
-	${COMP} ${OPT} ${INC} main.cpp -o $@
+	${COMP} ${OPT} ${INC} main.cpp -o $@ ${LIBS} ${BOOST_OPTS}
 
 ${OBJ}/%.o: ${CPP}/%.cpp | ${OBJ}/
-	${COMP} ${OPT} ${INC} -o $@ $<
+	${COMP} ${OPT} ${INC} -o $@ $< ${LIBS} ${BOOST_OPTS}
 
 .PHONY: clean
 clean:
