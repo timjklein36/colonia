@@ -1,6 +1,6 @@
 COMP=g++
 OPT=-c -Wall --std=c++11
-BIN=colony
+BIN=colonia
 OUT=out
 SRC=src
 BOOST=/usr/include/boost
