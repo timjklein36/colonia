@@ -2,18 +2,26 @@
 #define SIMULATION_H
 
 #include <vector>
+#include <memory>
 
 #include "Colony.h"
 
 class Simulation {
     private:
-        std::vector<Colony> colonies;
+        std::vector<std::unique_ptr<Colony>> colonies;
 
     public:
-        Simulation();
+        explicit Simulation();
 
-        void addColony(Colony& colony);
-        const std::vector<Colony> getColonies();
+        Simulation(const Simulation&) = delete;
+        Simulation& operator= (const Simulation&) = delete;
+
+        Simulation(Simulation&& simulation);
+
+        ~Simulation() = default;
+
+        void addColony(std::unique_ptr<Colony> colony);
+        const std::vector<std::unique_ptr<Colony>>& getColonies();
 
         void start();
         void stop();

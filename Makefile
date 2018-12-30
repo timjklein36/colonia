@@ -1,5 +1,5 @@
 COMP=g++
-OPT=-c -Wall --std=c++11
+OPT=-c -Wall --std=c++14
 BIN=colonia
 OUT=out
 SRC=src

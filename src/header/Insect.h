@@ -5,6 +5,8 @@
 
 class Insect: public Organism {
     private:
+
+    protected:
         Insect();
 
     public:

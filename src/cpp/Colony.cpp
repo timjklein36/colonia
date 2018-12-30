@@ -1,5 +1,3 @@
-#include "boost/log/trivial.hpp"
-
 #include "Colony.h"
 
 #define LOG BOOST_LOG_TRIVIAL
@@ -12,18 +10,18 @@ Colony::Colony(std::string name) {
     this->name = name;
 }
 
-void Colony::addMember(Organism& member) {
-    this->members.push_back(member);
+void Colony::addMember(std::unique_ptr<Organism> member) {
+    this->members.push_back(std::move(member));
 }
 
 template<class InputIter>
 void Colony::addMembers(InputIter begin, InputIter end) {
     for (begin; begin != end; ++begin) {
-        this->members.push_back(*begin);
+        this->members.push_back(std::move(*begin));
     }
 }
 
-const std::vector<Organism> Colony::getMembers() {
+const std::vector<std::unique_ptr<Organism>>& Colony::getMembers() {
     return this->members;
 }
 
@@ -48,7 +46,7 @@ std::ostream& operator<< (std::ostream& out, const Colony& colony) {
             out << ", ";
         }
 
-        out << *iter;
+        out << **iter; // Input Organism pointed to by pointer (after dereference)
     }
 
     out << "]}";

@@ -4,21 +4,31 @@
 #include <vector>
 #include <iterator>
 #include <string>
+#include <memory>
+
+#include "boost/log/trivial.hpp"
 
 #include "Organism.h"
 
 class Colony {
     private:
-        std::vector<Organism> members;
+        std::vector<std::unique_ptr<Organism>> members;
         std::string name;
 
     public:
-        Colony();
-        Colony(std::string name);
+        explicit Colony();
+        explicit Colony(std::string name);
 
-        void addMember(Organism& member);
+        Colony(const Colony&) = delete;
+        Colony& operator= (const Colony&) = delete;
+
+        Colony(Colony&&) = default;
+
+        ~Colony() = default;
+
+        void addMember(std::unique_ptr<Organism> member);
         template<class InputIter> void addMembers(InputIter begin, InputIter end);
-        const std::vector<Organism> getMembers();
+        const std::vector<std::unique_ptr<Organism>>& getMembers();
 
         void setName(std::string name);
         const std::string getName();

@@ -1,14 +1,16 @@
 #include "Simulation.h"
 
-#include <algorithm>
-
 Simulation::Simulation() {}
 
-void Simulation::addColony(Colony& colony) {
-    this->colonies.push_back(colony);
+Simulation::Simulation(Simulation&& simulation) {
+    this->colonies = std::move(simulation.colonies);
 }
 
-const std::vector<Colony> Simulation::getColonies() {
+void Simulation::addColony(std::unique_ptr<Colony> colony) {
+    this->colonies.push_back(std::move(colony));
+}
+
+const std::vector<std::unique_ptr<Colony>>& Simulation::getColonies() {
     return this->colonies;
 }
 
@@ -17,9 +19,9 @@ void Simulation::start() {}
 void Simulation::stop() {}
 
 void Simulation::reset() {
-    std::for_each(this->colonies.begin(), this->colonies.end(), [](Colony& c) {
-        c.reset();
-    });
+    for (auto iter = this->colonies.begin(); iter != this->colonies.end(); ++iter) {
+        (*iter)->reset();
+    }
 }
 
 std::ostream& operator<< (std::ostream& out, const Simulation& sim) {
@@ -30,7 +32,7 @@ std::ostream& operator<< (std::ostream& out, const Simulation& sim) {
             out << ", ";
         }
 
-        out << *iter;
+        out << **iter;
     }
 
     out << "]}";
