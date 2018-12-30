@@ -2,12 +2,18 @@
 
 #include "boost/log/trivial.hpp"
 
-#include "Colony.h"
+#include "Simulation.h"
 
 #define LOG BOOST_LOG_TRIVIAL
 
 int main(int argc, const char** argv) {
-    Colony antColony("My Ant Colony");
+    Simulation sim;
 
-    LOG(info) << antColony;
+    Colony antColony("Ant Colony");
+
+    sim.addColony(antColony);
+
+    LOG(info) << sim;
+
+    sim.reset();
 }

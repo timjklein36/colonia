@@ -1,4 +1,8 @@
+#include "boost/log/trivial.hpp"
+
 #include "Colony.h"
+
+#define LOG BOOST_LOG_TRIVIAL
 
 Colony::Colony() {
     this->name = "Generic Colony";
@@ -31,8 +35,12 @@ const std::string Colony::getName() {
     return this->name;
 }
 
+void Colony::reset() {
+    LOG(info) << "Colony '" << this->name << "' reset!";
+}
+
 std::ostream& operator<< (std::ostream& out, const Colony& colony) {
-    out << "Colony: '" << colony.name << "', ";
+    out << "Colony: {Name: '" << colony.name << "', ";
     out << "Members: [";
 
     for (auto iter = colony.members.cbegin(); iter != colony.members.cend(); ++iter) {
@@ -43,7 +51,7 @@ std::ostream& operator<< (std::ostream& out, const Colony& colony) {
         out << *iter;
     }
 
-    out << "]";
+    out << "]}";
 
     return out;
 }

@@ -26,6 +26,8 @@ class Colony {
         const int size();
         const int dead();
 
+        void reset();
+
         friend std::ostream& operator<< (std::ostream& out, const Colony& colony);
 };
 

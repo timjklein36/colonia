@@ -11,7 +11,7 @@ OBJ=object
 INC=-I${HEAD} -I${BOOST}
 LIBS=-L/usr/lib -lboost_log -lpthread
 
-CLASSES= Colony Organism Insect Ant
+CLASSES= Simulation Colony Organism Insect Ant
 
 # Replace all CLASSES with ${OBJ}/%.o (e.g. "object_directory/util.o")
 _OBJS_= $(patsubst %, ${OBJ}/%.o, ${CLASSES}) ${OBJ}/main.o
