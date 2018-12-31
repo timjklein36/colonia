@@ -9,15 +9,15 @@ void BasicSimulationRunner::run() {
         this->tick();
 
         if (this->pollForInput()) {
-            bool validInput = false;
+            bool isValidInput = false;
 
-            while (!validInput) {
+            while (!isValidInput) {
                 std::cout << "What would you like to do? (Type '?' for available commands): ";
                 std::getline(std::cin, this->input);
 
                 boost::trim(this->input); // Trim leading and trailing whitespace
 
-                validInput = this->validateInput();
+                isValidInput = this->validateInput();
             }
 
             this->executeInputCommand();
