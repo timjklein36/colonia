@@ -14,14 +14,42 @@ const std::vector<std::unique_ptr<Colony>>& Simulation::getColonies() {
     return this->colonies;
 }
 
-void Simulation::start() {}
+void Simulation::start() {
+    if (this->running) {
+        LOG(warning) << "Simulation is already running.";
+    } else {
+        LOG(info) << "Simulation started.";
+        this->running = true;
+    }
+}
 
-void Simulation::stop() {}
+void Simulation::stop() {
+    if (!this->running) {
+        LOG(warning) << "Simulation is already stopped.";
+    } else {
+        LOG(info) << "Simulation stopped.";
+        this->running = false;
+    }
+}
 
 void Simulation::reset() {
+    LOG(info) << "Simulation beginning reset...";
+
+    this->stop();
+
     for (auto iter = this->colonies.begin(); iter != this->colonies.end(); ++iter) {
         (*iter)->reset();
     }
+
+    LOG(info) << "Simulation reset complete.";
+}
+
+void Simulation::tick() {
+    LOG(debug) << "Simulation ticked.";
+}
+
+bool Simulation::isRunning() {
+    return this->running;
 }
 
 std::ostream& operator<< (std::ostream& out, const Simulation& sim) {
