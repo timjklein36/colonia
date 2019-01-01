@@ -33,9 +33,25 @@ const std::string Colony::getName() {
     return this->name;
 }
 
+const int Colony::size() const {
+    return this->members.size();
+}
+
+const int Colony::dead() const {
+    int count = 0;
+
+    for (auto memberIter = this->members.cbegin(); memberIter != this->members.cend(); ++memberIter) {
+        if (!(*memberIter)->isAlive()) {
+            ++count;
+        }
+    }
+
+    return count;
+}
+
 void Colony::tick(double deltaSeconds) {
-    for (auto iter = this->members.begin(); iter != this->members.end(); ++iter) {
-        (*iter)->tick(deltaSeconds);
+    for (auto memberIter = this->members.begin(); memberIter != this->members.end(); ++memberIter) {
+        (*memberIter)->tick(deltaSeconds);
     }
 }
 
@@ -45,17 +61,8 @@ void Colony::reset() {
 
 std::ostream& operator<< (std::ostream& out, const Colony& colony) {
     out << "Colony: {Name: '" << colony.name << "', ";
-    out << "Members: [";
-
-    for (auto iter = colony.members.cbegin(); iter != colony.members.cend(); ++iter) {
-        if (iter != colony.members.cbegin()) {
-            out << ", ";
-        }
-
-        out << **iter; // Input Organism pointed to by pointer (after dereference)
-    }
-
-    out << "]}";
+    out << "No. Members: " << colony.size() << ", ";
+    out << "No. Dead: " << colony.dead() << "}";
 
     return out;
 }

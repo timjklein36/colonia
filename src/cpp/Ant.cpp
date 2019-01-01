@@ -1,7 +1,8 @@
 #include "Ant.h"
 
 Ant::Ant() {
-    this->setMovementRate(8.0);
+    this->setAlive(true);
+    this->setMovementRate(8.0); // Ants move at 8 cm/s
 }
 
 const unsigned short Ant::getMaxEnergy() {

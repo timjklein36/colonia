@@ -26,8 +26,8 @@ class Colony {
         void setName(std::string name);
         const std::string getName();
 
-        const int size();
-        const int dead();
+        const int size() const;
+        const int dead() const;
 
         void tick(double deltaSeconds);
 
