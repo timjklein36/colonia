@@ -3,8 +3,10 @@
 
 #include <string>
 #include <iostream>
+#include <set>
 
 #include "boost/algorithm/string.hpp"
+#include "boost/algorithm/cxx11/any_of.hpp"
 
 #include "SFML/Window.hpp"
 
@@ -15,6 +17,8 @@ class BasicSimulationRunner: public SimulationRunner {
         bool quit;
 
         std::string input;
+
+        std::set<std::string> validInputCommands = {"p", "q", "r", "s", "x"};
 
         void quitRunner();
 

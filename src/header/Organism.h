@@ -5,18 +5,24 @@
 
 class Organism {
     private:
-        bool living;
+        bool alive;
+        unsigned short energy;
 
     protected:
-        explicit Organism();
+        void setAlive(bool alive);
+
+        void setEnergy(unsigned short energy);
 
     public:
-        Organism(const Organism&) = delete;
-        Organism& operator= (const Organism&) = delete;
-
-        ~Organism() = default;
+        virtual ~Organism() = default;
 
         const bool isAlive();
+
+        const unsigned short getEnergy();
+
+        virtual const unsigned short getMaxEnergy() = 0;
+
+        virtual void tick(double deltaSeconds) = 0;
 
         friend std::ostream& operator<< (std::ostream& out, const Organism& organism);
 };

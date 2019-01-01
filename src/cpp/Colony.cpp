@@ -33,6 +33,12 @@ const std::string Colony::getName() {
     return this->name;
 }
 
+void Colony::tick(double deltaSeconds) {
+    for (auto iter = this->members.begin(); iter != this->members.end(); ++iter) {
+        (*iter)->tick(deltaSeconds);
+    }
+}
+
 void Colony::reset() {
     LOG(info) << "Colony '" << this->name << "' reset!";
 }

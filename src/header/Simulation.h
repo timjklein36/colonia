@@ -14,18 +14,10 @@ class Simulation {
     private:
         std::vector<std::unique_ptr<Colony>> colonies;
         short max_colonies;
-        unsigned long max_duration; // Milliseconds
         bool running;
 
     public:
-        explicit Simulation();
-
-        Simulation(const Simulation&) = delete;
-        Simulation& operator= (const Simulation&) = delete;
-
-        Simulation(Simulation&& simulation);
-
-        ~Simulation() = default;
+        virtual ~Simulation() = default;
 
         void addColony(std::unique_ptr<Colony> colony);
         const std::vector<std::unique_ptr<Colony>>& getColonies();
@@ -34,7 +26,7 @@ class Simulation {
         void stop();
         void reset();
 
-        void tick();
+        void tick(double deltaSeconds);
 
         bool isRunning();
 

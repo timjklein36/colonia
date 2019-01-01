@@ -1,16 +1,12 @@
 #ifndef INSECT_H
 #define INSECT_H
 
-#include "Organism.h"
+#include "boost/log/trivial.hpp"
 
-class Insect: public Organism {
-    private:
+#include "Animal.h"
 
-    protected:
-        Insect();
+#define LOG BOOST_LOG_TRIVIAL
 
-    public:
-        const bool isMolting();
-};
+class Insect: public Animal {};
 
 #endif

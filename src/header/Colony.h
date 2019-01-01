@@ -16,15 +16,8 @@ class Colony {
         std::string name;
 
     public:
-        explicit Colony();
-        explicit Colony(std::string name);
-
-        Colony(const Colony&) = delete;
-        Colony& operator= (const Colony&) = delete;
-
-        Colony(Colony&&) = default;
-
-        ~Colony() = default;
+        Colony();
+        Colony(std::string name);
 
         void addMember(std::unique_ptr<Organism> member);
         template<class InputIter> void addMembers(InputIter begin, InputIter end);
@@ -35,6 +28,8 @@ class Colony {
 
         const int size();
         const int dead();
+
+        void tick(double deltaSeconds);
 
         void reset();
 

@@ -9,13 +9,14 @@ HEAD=${SRC}/header
 CPP=${SRC}/cpp
 OBJ=object
 INC=-I${HEAD} -I${BOOST}
-LIBS=-L/usr/lib -lboost_log -lpthread -lsfml-window
+LIBS=-L/usr/lib -lboost_log -lboost_system -lpthread -lsfml-window
 
 CLASSES= SimulationRunner \
 	BasicSimulationRunner \
 	Simulation \
 	Colony \
 	Organism \
+	Animal \
 	Insect \
 	Ant
 

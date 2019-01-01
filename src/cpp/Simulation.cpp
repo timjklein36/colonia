@@ -1,11 +1,5 @@
 #include "Simulation.h"
 
-Simulation::Simulation() {}
-
-Simulation::Simulation(Simulation&& simulation) {
-    this->colonies = std::move(simulation.colonies);
-}
-
 void Simulation::addColony(std::unique_ptr<Colony> colony) {
     this->colonies.push_back(std::move(colony));
 }
@@ -44,8 +38,12 @@ void Simulation::reset() {
     LOG(info) << "Simulation reset complete.";
 }
 
-void Simulation::tick() {
-    LOG(debug) << "Simulation ticked.";
+void Simulation::tick(double deltaSeconds) {
+    if (this->running) {
+        LOG(trace) << "Simulation ticked. (Simulated) Delta Seconds: [" << deltaSeconds << "].";
+    } else {
+        // Do nothing, as simulation is stopped (possible idle processing could go here)
+    }
 }
 
 bool Simulation::isRunning() {
