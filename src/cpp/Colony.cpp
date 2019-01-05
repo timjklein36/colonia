@@ -50,6 +50,8 @@ const int Colony::dead() const {
 }
 
 void Colony::tick(double deltaSeconds) {
+    LOG(trace) << "Colony ticked. Delta Seconds: [" << deltaSeconds << "].";
+
     for (auto memberIter = this->members.begin(); memberIter != this->members.end(); ++memberIter) {
         (*memberIter)->tick(deltaSeconds);
     }

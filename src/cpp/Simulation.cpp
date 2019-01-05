@@ -41,6 +41,10 @@ void Simulation::reset() {
 void Simulation::tick(double deltaSeconds) {
     if (this->running) {
         LOG(trace) << "Simulation ticked. (Simulated) Delta Seconds: [" << deltaSeconds << "].";
+
+        for (auto colonyIter = this->colonies.begin(); colonyIter != this->colonies.end(); ++colonyIter) {
+            (*colonyIter)->tick(deltaSeconds);
+        }
     } else {
         // Do nothing, as simulation is stopped (possible idle processing could go here)
     }
