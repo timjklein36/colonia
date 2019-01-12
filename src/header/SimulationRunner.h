@@ -4,6 +4,7 @@
 #include <memory>
 
 #include "boost/log/trivial.hpp"
+#include "boost/log/core.hpp"
 #include "boost/date_time/posix_time/posix_time.hpp"
 
 #include "Simulation.h"

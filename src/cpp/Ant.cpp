@@ -11,4 +11,6 @@ const unsigned short Ant::getMaxEnergy() {
 
 void Ant::tick(double deltaSeconds) {
     LOG(trace) << "Ant ticked. Delta Seconds: [" << deltaSeconds << "].";
+
+    this->move(POS_X, deltaSeconds);
 }

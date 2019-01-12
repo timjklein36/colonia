@@ -57,7 +57,8 @@ void SimulationRunner::tickSimulation() {
     this->simulation->tick(secondsToSimulate);
 
     if ((int)this->elapsedTime % 2 == (int)this->logElapsedTime) {
-        LOG(debug) << "Elapsed Time: [" << this->elapsedTime << "].";
+        LOG(trace) << "Elapsed Time: [" << this->elapsedTime << "].";
+        LOG(debug) << "Ant location: " << *this->simulation->getColonies().at(0)->getMembers().at(0);
         this->logElapsedTime = !this->logElapsedTime;
     }
 }
